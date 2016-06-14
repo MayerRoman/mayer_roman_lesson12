@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration>
+
+    <appenders>
+
+        <console name="ConsoleAppender">
+            <patternLayout pattern="%d{date:MM-dd-yyyy HH:mm:ss} %t %5p %c{1} (%F:%L) message - %m%n"/>
+        </console>
+
+        <rollingFile name="RollingFileAppender" fileName="log/application.log"
+                     filePattern="log/applicationLog-%d{MM-dd-yyyy}-%i.log">
+            <patternLayout pattern="%d{date:MM-dd-yyyy HH:mm:ss} %t %5p %c{1} (%F:%L) message - %m%n"/>
+            <policies>
+                <sizeBasedTriggeringPolicy size="1 MB"/>
+            </policies>
+        </rollingFile>
+
+    </appenders>
+
+    <Loggers>
+        <Logger name="dao.impl.Xml.XmlSingerDAO" level="ERROR" additivity="false">
+            <appender-ref ref="ConsoleAppender"/>
+            <appender-ref ref="RollingFileAppender"/>
+        </Logger>
+
+        <Logger name="dao.impl.PsgSql.PsgSqlSingerDAO" level="ERROR" additivity="false">
+            <appender-ref ref="ConsoleAppender"/>
+            <appender-ref ref="RollingFileAppender"/>
+        </Logger>
+
+        <Logger name="dao.impl.PsgSql.PsgSqlDaoFactory" level="ERROR" additivity="false">
+            <appender-ref ref="ConsoleAppender"/>
+            <appender-ref ref="RollingFileAppender"/>
+        </Logger>
+
+    </Loggers>
+
+
+</Configuration>
