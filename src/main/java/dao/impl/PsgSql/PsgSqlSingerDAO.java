@@ -212,12 +212,9 @@ class PsgSqlSingerDAO implements SingerDAO {
             ArrayList<Album> albumsToUpdate = new ArrayList<>();
 
             for (Album albumWasInDB : albumsWasInDB) {
-                for (Album albumSingerHaveNow : albumsSingerHaveNow) {
-                    if (albumSingerHaveNow.getId() == albumWasInDB.getId()) {
-                        albumsToUpdate.add(albumSingerHaveNow);
-                        break;
-                    }
-                }
+                albumsToUpdate.addAll(albumsSingerHaveNow.stream()
+                        .filter(albumSingerHaveNow -> albumWasInDB.getId() == albumSingerHaveNow.getId())
+                        .collect(Collectors.toList()));
             }
 
 
@@ -416,14 +413,14 @@ class PsgSqlSingerDAO implements SingerDAO {
         for (Album album : albums) {
 
             ArrayList<Song> songsWasInDB = (ArrayList<Song>) readSongs(album.getId());
-            ArrayList<Song> songsSingerHaveNow = new ArrayList<>(album.getSongs());
+            ArrayList<Song> songsAlbumHaveNow = new ArrayList<>(album.getSongs());
 
 
             if (songsWasInDB != null) {
                 ArrayList<Song> songsToUpdate = new ArrayList<>();
 
                 for (Song songWasInDB : songsWasInDB) {
-                    songsToUpdate.addAll(songsSingerHaveNow.stream()
+                    songsToUpdate.addAll(songsAlbumHaveNow.stream()
                             .filter(songSingerHaveNow -> songWasInDB.getId() == songSingerHaveNow.getId())
                             .collect(Collectors.toList()));
                 }
@@ -446,12 +443,12 @@ class PsgSqlSingerDAO implements SingerDAO {
                 if (songsToUpdate.size() > 0) {
                     updateSongs(songsToUpdate);
 
-                    songsSingerHaveNow.removeAll(songsToUpdate);
+                    songsAlbumHaveNow.removeAll(songsToUpdate);
                 }
             }
 
-            if (songsSingerHaveNow.size() > 0) {
-                createSongs(songsSingerHaveNow, singerId, album.getId());
+            if (songsAlbumHaveNow.size() > 0) {
+                createSongs(songsAlbumHaveNow, singerId, album.getId());
             }
         }
 
