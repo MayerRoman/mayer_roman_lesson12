@@ -38,7 +38,7 @@ public class PsgSqlDaoFactory implements DAOFactory {
             connection = DriverManager.getConnection(URL, properties);
 
         } catch (SQLException | IllegalAccessException | InstantiationException | ClassNotFoundException e) {
-            LOGGER.error("Getting connection do PsqSqlDB exception", e);
+            LOGGER.error("Getting connection to PsqSqlDB exception", e);
         }
     }
 

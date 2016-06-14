@@ -63,6 +63,7 @@ public class PsgSqlSingerDAOTest {
         Singer singerBeforeSaving = prepareSinger();
         int singerId = singerBeforeSaving.getId();
 
+
         try {
             singerDAO.createSinger(singerBeforeSaving);
 
@@ -199,6 +200,14 @@ public class PsgSqlSingerDAOTest {
         song = new Song(2, "TestSong2", Duration.ofMinutes(3).plusSeconds(34));
         album1.setSong(song);
 
+        Album album2 = new Album(2, "TestAlbum", "TestGenre");
+        singer.setAlbum(album2);
+
+        song = new Song(3, "TestSong3", Duration.ofMinutes(4).plusSeconds(45));
+        album2.setSong(song);
+        song = new Song(4, "TestSong4", Duration.ofMinutes(3).plusSeconds(34));
+        album2.setSong(song);
+
 
         return singer;
     }
@@ -211,23 +220,27 @@ public class PsgSqlSingerDAOTest {
 
         Album allThatYouCantLeaveBehind = new Album(1, "All that you can't left behind", "Pop-Rock");
         Album howToDismantleAnAtomicBomb = new Album(2, "How To Dismantle An Atomic Bomb", "Rock");
-        Album brandNewDay = new Album(3, "Brand New Day", "Pop");
-        Album whoMadeWho = new Album(4, "Who Made Who", "Rock");
+        Album theJoshuaTree = new Album(3, "The Joshua Tree", "Rock");
+        Album brandNewDay = new Album(4, "Brand New Day", "Pop");
+        Album whoMadeWho = new Album(5, "Who Made Who", "Rock");
 
         Song elevation = new Song(1, "Elevation", Duration.ofMinutes(3).plusSeconds(46));
         Song walkOn = new Song(2, "Walk On", Duration.ofMinutes(4).plusSeconds(56));
         Song vertigo = new Song(3, "Vertigo", Duration.ofMinutes(3).plusSeconds(13));
-        Song desertRose = new Song(4, "Desert Rose", Duration.ofMinutes(4).plusSeconds(47));
-        Song forThoseAboutToRock = new Song(5, "For Those About To Rock", Duration.ofMinutes(5).plusSeconds(53));
+        Song whereTheStreetsHaveNoName = new Song(4, "Where The Streets Have No Name", Duration.ofMinutes(5).plusSeconds(36));
+        Song desertRose = new Song(5, "Desert Rose", Duration.ofMinutes(4).plusSeconds(47));
+        Song forThoseAboutToRock = new Song(6, "For Those About To Rock", Duration.ofMinutes(5).plusSeconds(53));
 
         u2.setAlbum(allThatYouCantLeaveBehind);
         u2.setAlbum(howToDismantleAnAtomicBomb);
+        u2.setAlbum(theJoshuaTree);
         sting.setAlbum(brandNewDay);
         acDc.setAlbum(whoMadeWho);
 
         allThatYouCantLeaveBehind.setSong(elevation);
         allThatYouCantLeaveBehind.setSong(walkOn);
         howToDismantleAnAtomicBomb.setSong(vertigo);
+        theJoshuaTree.setSong(whereTheStreetsHaveNoName);
         brandNewDay.setSong(desertRose);
         whoMadeWho.setSong(forThoseAboutToRock);
 

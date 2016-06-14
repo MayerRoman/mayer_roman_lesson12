@@ -220,7 +220,8 @@ class PsgSqlSingerDAO implements SingerDAO {
                 }
             }
 
-            for (Album albumToUpdate :albumsToUpdate) {
+
+            for (Album albumToUpdate : albumsToUpdate) {
                 for (int i = 0; i < albumsWasInDB.size(); i++) {
                     if (albumToUpdate.getId() == albumsWasInDB.get(i).getId()) {
                         albumsWasInDB.remove(i);
@@ -231,7 +232,8 @@ class PsgSqlSingerDAO implements SingerDAO {
 
 
             if (albumsWasInDB.size() > 0) {
-                deleteAlbums(albumsWasInDB);            }
+                deleteAlbums(albumsWasInDB);
+            }
 
 
             if (albumsToUpdate.size() > 0) {
@@ -396,9 +398,10 @@ class PsgSqlSingerDAO implements SingerDAO {
                 preparedStatement.setInt(5, albumId);
 
 
-                preparedStatement.executeUpdate();
+                preparedStatement.addBatch();
             }
 
+            preparedStatement.executeBatch();
             preparedStatement.close();
 
         } catch (SQLException e) {
